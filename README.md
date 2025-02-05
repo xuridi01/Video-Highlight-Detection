@@ -1,7 +1,7 @@
 # Video Highlight Detection
 
 ### Unified Multi-modal Transformers
-Prošel jsem různé články a přístupy, ale nakonec jsem se rozhodl jít cestou UML.
+Prošel jsem různé články a přístupy, ale nakonec jsem se rozhodl jít cestou UMT.
 Koukal jsem, že tento přístup jste měli i v doporučených studiích.
 Model je založen na získávání kontextu z video a audio části pomocí transformer architektury, následně pak tyto dva vstupy
 kombinuje (dá se použít i text query pro MR, nicméně model funguje i bez toho pro HD) a dokáže vypíchnout highlight momenty.
@@ -13,18 +13,18 @@ kombinuje (dá se použít i text query pro MR, nicméně model funguje i bez to
 
 - Rozparsování videa na segmenty (1-2s)
 - Převod na optical flow a rgb složky - numpy pole (get_rgb_and_opt.py)
-- Extrakce důležitých informací z těchto složek pomocí I3D modelu a vytvoření polí vhodných pro vstup do UML (create_features.py)
+- Extrakce důležitých informací z těchto složek pomocí I3D modelu a vytvoření polí vhodných pro vstup do UMT (create_features.py)
   
   - GitHub: https://github.com/google-deepmind/kinetics-i3d
   - Studie: https://arxiv.org/pdf/1705.07750
 
-- Inference modelu UML 
+- Inference modelu UMT 
   
   - Pro potřeby Highlight detection jsem zvolil předtrénované modely na datasetu Youtube Highlights, které jsou poskytnuty na Githubu
   - Tyto modely byly trénovány speciálně pouze pro Highlight detection bez textového query
   - Inference modelu
   - Jako výstup bylo vytaženo ohodnocení segmentů videa - Highlights
-  - Pro integraci našeho datasetu bylo potřeba změnit hodně scriptů, tak jsem dávám jen snippet samotné třídy UML s metodou forward, celé to běží na NNcoru a je to dost spletité, tak snad to stačí
+  - Pro integraci našeho datasetu bylo potřeba změnit hodně scriptů, tak jsem dávám jen snippet samotné třídy UMT s metodou forward, celé to běží na NNcoru a je to dost spletité, tak snad to stačí
     ````python
     @MODELS.register()
     class UMT(nn.Module):
